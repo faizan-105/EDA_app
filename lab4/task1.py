@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import seaborn as sns
 import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="EDA App", layout="wide")
@@ -40,17 +41,18 @@ else:
     # ---------- Bottom section: visualization ----------
     st.write("### Visualization")
 
+    sns.set_style("whitegrid")
     fig, ax = plt.subplots()
 
     if df[col].dtype == "object":          # categorical column
         st.write("Selected column is Categorical")
-        counts = df[col].value_counts()
-        ax.bar(counts.index.astype(str), counts.values, color="orange")
+        sns.countplot(x=df[col], color="orange", ax=ax)
         ax.set_ylabel("Count")
         ax.set_title("Bar Chart of " + col)
+        plt.xticks(rotation=45)
     else:                                  # numerical column
         st.write("Selected column is Numerical")
-        ax.hist(df[col].dropna(), bins=20, color="skyblue")
+        sns.histplot(df[col].dropna(), bins=20, kde=True, color="skyblue", ax=ax)
         ax.set_ylabel("Frequency")
         ax.set_title("Histogram of " + col)
 
