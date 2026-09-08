@@ -52,7 +52,7 @@ else:
         plt.xticks(rotation=45)
     else:                                  # numerical column
         st.write("Selected column is Numerical")
-        sns.histplot(df[col].dropna(), bins=20, kde=True, color="skyblue", ax=ax)
+        sns.histplot(df[col].dropna(), bins=20, kde=True, color="steelblue", ax=ax, edgecolor = "black")
         ax.set_ylabel("Frequency")
         ax.set_title("Histogram of " + col)
 
